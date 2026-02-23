@@ -1,0 +1,26 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: AuthUser
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+endpoints.web:
+  exposure:
+    include: "*"
+
+endpoints:
+  health:
+    show-details: always
