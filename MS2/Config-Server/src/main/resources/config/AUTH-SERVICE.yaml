@@ -23,3 +23,8 @@ endpoints.web:
 endpoints:
   health:
     show-details: always
+
+jwt:
+  secret: "Hi#This1!$-My_SecretKey@hereWeCanAdd*2AnyThingFor&3JWTAuthentication"
+
+

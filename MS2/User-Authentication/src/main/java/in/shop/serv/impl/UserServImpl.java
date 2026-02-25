@@ -27,10 +27,9 @@ public class UserServImpl implements UserService {
         AuthUser authUser = authRepo.findByUsername(username).orElseThrow(
                 () -> new UserNotFound("User not found with username: " + username));
 
-        if (username.equals(authUser.getUsername())) {
+
             return DtoMapper.mapToAuthRes(authUser);
-        }
-        throw new IllegalArgumentException("You Are Not Allowed To get Details , You are not valid to get details");
+
     }
 
     @Override
@@ -39,7 +38,7 @@ public class UserServImpl implements UserService {
         authRepo.findById(userId).orElseThrow(
                 () -> new UserNotFound("User not found with id: " + userId));
          AuthUser authUser = DtoMapper.mapToAuthUser(authReq);
-            authUser.setUpdatedAt(LocalDateTime.now());
+         authUser.setUpdatedAt(LocalDateTime.now());
          authUser.setUserId(userId);
 
          AuthUser updated = authRepo.save(authUser);
@@ -63,7 +62,7 @@ public class UserServImpl implements UserService {
          authRepo.findByUsername(username).orElseThrow(
                 () -> new UserNotFound("User not found with username: " + username));
          AuthUser authUser = DtoMapper.mapToAuthUser(authReq);
-            authUser.setUpdatedAt(LocalDateTime.now());
+         authUser.setUpdatedAt(LocalDateTime.now());
          authUser.setUsername(username);
 
          AuthUser updated = authRepo.save(authUser);
