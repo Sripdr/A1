@@ -2,6 +2,7 @@ package in.shop.serv.impl;
 
 import in.shop.dto.*;
 import in.shop.entity.AuthUser;
+import in.shop.jwt.JWTService;
 import in.shop.map.DTOMapper;
 import in.shop.repo.AuthRepository;
 import in.shop.serv.AuthService;
@@ -13,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Set;
@@ -25,6 +28,7 @@ public class AuthServiceImpl implements AuthService {
     private final AuthRepository authRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JWTService jwtService;
 
     @Override
     public RegisterResponse registerAdmin(RegisterRequest request) {
@@ -54,7 +58,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public LoginResponse login(LoginRequest request) {
+    public LoginResponse login(LoginRequest request) throws UnsupportedEncodingException {
 
         log.info("The Request for login for User :"+request.username().toUpperCase());
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
@@ -62,11 +66,15 @@ public class AuthServiceImpl implements AuthService {
         if (!authenticate.isAuthenticated())
             throw new UsernameNotFoundException("Invalid username or password");
         AuthUser user = (AuthUser) authenticate.getPrincipal();
+
         assert user != null;
+      String token =  jwtService.generateToken(user.getUsername());
+
+
         return new LoginResponse("Hi User You are Authenticate for user ID :"+user.getUserId(),
                 "Current Date & Time Is : "+LocalDateTime.now(),
                 "The User Is :  "+user.getUsername(),
-                " here token is "
+                token
         );
 
     }
