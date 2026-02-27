@@ -64,17 +64,17 @@ public class AuthServiceImpl implements AuthService {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
 
         if (!authenticate.isAuthenticated())
-            throw new UsernameNotFoundException("Invalid username or password");
+            throw new UsernameNotFoundException("Invalid username or password"+request.username());
         AuthUser user = (AuthUser) authenticate.getPrincipal();
 
         assert user != null;
-      String token =  jwtService.generateToken(user.getUsername());
+      String JWTToken =  jwtService.generateToken(user.getUsername());
 
 
-        return new LoginResponse("Hi User You are Authenticate for user ID :"+user.getUserId(),
-                "Current Date & Time Is : "+LocalDateTime.now(),
-                "The User Is :  "+user.getUsername(),
-                token
+        return new LoginResponse("Hi  "+user.getFirstName()+ " "+user.getLastName()+" Welcome To SHOP.IN  You are Authenticated, Your User ID is : "+user.getUserId(),
+                LocalDateTime.now(),
+                user.getUsername(),
+                JWTToken
         );
 
     }
