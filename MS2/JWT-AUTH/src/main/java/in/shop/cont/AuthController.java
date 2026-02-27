@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.UnsupportedEncodingException;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/authapi/shop/auth")
 @RequiredArgsConstructor
 public class AuthController {
 

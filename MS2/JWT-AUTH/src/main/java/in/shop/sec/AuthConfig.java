@@ -41,9 +41,9 @@ public class AuthConfig {
                                   sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
                         auth -> auth
-                                 .requestMatchers("/api/auth/**").permitAll()
-                                 .requestMatchers("/api/admin/**").hasAllRoles("ADMIN")
-                                 .requestMatchers("/api/user/**").hasRole("USER")
+                                 .requestMatchers("/authapi/shop/auth/**").permitAll()
+                                 .requestMatchers("/authapi/shop/admin/**").hasAllRoles("ADMIN")
+                                 .requestMatchers("/authapi/shop/user/**").hasRole("USER")
                                  .anyRequest().authenticated()
                                       )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

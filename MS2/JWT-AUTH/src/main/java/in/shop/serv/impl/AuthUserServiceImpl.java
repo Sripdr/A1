@@ -78,7 +78,7 @@ public class AuthUserServiceImpl implements AuthUserService {
     @Override
     public AuthUserResponse updatePhoneNumberById(Long userId, String phoneNumber) {
         AuthUser authUser = authRepository.findById(userId).orElseThrow(()-> new UserNotFound(" The User for Id:  "+userId+" is not found."));
-        authUser.setPhoneNumber(phoneNumber);
+        authUser.setPhoneNumber("+91"+phoneNumber);
         authUser.setUpdatedAt(LocalDateTime.now());
         AuthUser updateuser = authRepository.save(authUser);
         log.info("Saved User "+updateuser.getUsername());
