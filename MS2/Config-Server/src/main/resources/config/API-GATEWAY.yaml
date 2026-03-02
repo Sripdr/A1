@@ -14,5 +14,8 @@ spring:
             - id: auth-service
               uri: lb://JWT-AUTH
               predicates:
-                - Path=/authapi/shop/**
+                - Path=/shop/authent/**
 
+
+jwt:
+  secret: "Hi#This1!$-My!Secret_Key@hereWeCanAdd*2AnyThingFor&3JWTAuthentication"

@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/auth
+    url: jdbc:postgresql://localhost:5432/shop
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
@@ -25,6 +25,6 @@ endpoints:
     show-details: always
 
 jwt:
-  secret: "Hi#This1!$-My_SecretKey@hereWeCanAdd*2AnyThingFor&3JWTAuthentication"
+  secret: "Hi#This1!$-My!Secret_Key@hereWeCanAdd*2AnyThingFor&3JWTAuthentication"
 
 
